@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { ComponentMap } from './types/login-type'
-import PhoneCodeForm from './components/PhoneCodeForm.vue'
-import AccountForm from './components/PhoneCodeForm.vue'
-import QcodeForm from './components/PhoneCodeForm.vue'
+
+import { PhoneCodeForm, AccountForm, QcodeForm } from './components'
+
+const bgColor = 'linear-gradient(0deg, #2196f3, #00bcd4, #00bcd4, #03a9f4)'
 const loginPanelWidth = '800px'
 const loginPanelHeight = '400px'
+
 const tabList = ref<ComponentMap[]>([
   { name: '免密登录', componentName: PhoneCodeForm },
   { name: '账号登录', componentName: AccountForm },
   { name: '扫码登录', componentName: QcodeForm }
 ])
-const bgColor = 'linear-gradient(0deg, #2196f3, #00bcd4, #00bcd4, #03a9f4)'
+
 const currentTab = ref(0)
+
 const changeTab = (index: number) => {
   currentTab.value = index
 }
@@ -36,18 +39,9 @@ const changeTab = (index: number) => {
           >
             {{ item.name }}
           </div>
-          <!-- <div @click="changeTab(2)" :class="{ selected: currentTab === 2 }" class="tab-item">
-            账号登录
-          </div>
-          <div @click="changeTab(3)" :class="{ selected: currentTab === 3 }" class="tab-item">
-            扫码登录
-          </div> -->
         </div>
         <div class="tabs-content">
           <component :is="tabList[currentTab].componentName"></component>
-          <!-- <PhoneCodeForm v-if="currentTab === 1" />
-          <AccountForm v-else-if="currentTab === 2" />
-          <QcodeForm v-else /> -->
         </div>
       </div>
     </div>
@@ -113,8 +107,9 @@ const changeTab = (index: number) => {
         }
       }
 
-      // .tabs-content {
-      // }
+      .tabs-content {
+        padding: 20px 45px 0;
+      }
     }
   }
 
